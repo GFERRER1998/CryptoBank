@@ -27,7 +27,7 @@ function GovernanceContent() {
   const { vote, isPending: isVoting, isSuccess: voteSuccess, error: voteError } = useVote(selectedProposalId!, voteSupport);
   const { delegate, isPending: isDelegating, isSuccess: delegateSuccess } = useDelegate(address!);
 
-  const PROPOSAL_THRESHOLD = 10000n * 10n ** 18n;
+  const PROPOSAL_THRESHOLD = BigInt("10000000000000000000000");
 const canCreateProposal = cbBalance && cbBalance >= PROPOSAL_THRESHOLD;
 
   const activeProposals = proposals.filter(p => p.state === "Active" || p.state === "Pending").length;

@@ -52,7 +52,7 @@ function LendingContent() {
   const aTokenAddress = tokenInfo?.isAToken ? assetAddress : ATOKEN_ADDRESSES[selectedSymbol as keyof typeof ATOKEN_ADDRESSES];
   const lendingPoolAddress = "0x2C1BAe355B41926a310B649B962faE85Fb8E57D1" as const;
 
-  const { balance: ethBalance } = useBalance({ address, chainId: 11155111 });
+  const { data: ethBalance } = useBalance({ address, chainId: 11155111 });
 
   const { data: reserveData, isLoading: reserveLoading, refetch: refetchReserve } = useReserveData(assetAddress);
   const { data: userReserveData, isLoading: userReserveLoading, refetch: refetchUserReserve } = useUserReserveData(assetAddress);

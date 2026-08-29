@@ -393,7 +393,7 @@ function LendingContent() {
                           <td className="text-right py-4 text-green-400">{sAPY.toFixed(2)}%</td>
                           <td className="text-right py-4 text-yellow-400">{bAPY.toFixed(2)}%</td>
                           <td className="text-right py-4 text-white">
-                            {uab ? parseFloat(uab).toFixed(4) : "0"} a{asset.symbol}
+                            {uab ? parseFloat(formatTokenAmount(uab, decimals)).toFixed(4) : "0"} a{asset.symbol}
                           </td>
                           <td className="text-right py-4 text-white">
                             {urd ? parseFloat(formatTokenAmount(urd.currentVariableDebt, decimals)).toFixed(4) : "0"} {asset.symbol}

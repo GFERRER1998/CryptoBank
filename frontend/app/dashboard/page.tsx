@@ -5,13 +5,13 @@ import { formatEther, formatUnits } from "viem";
 import { StatsCard } from "@/components/StatsCard";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useUserAccountData, useHealthFactor } from "@/hooks/useLendingPool";
-import { useTokenBalance, TOKEN_LIST, formatTokenAmount, parseTokenAmount } from "@/hooks/useTokenBalance";
+import { useTokenBalance, TOKEN_LIST, formatTokenAmount } from "@/hooks/useTokenBalance";
 import { useAllTokenPrices } from "@/hooks/usePriceFeed";
-import { SEPOLIA_TOKENS, ATOKEN_ADDRESSES, CB_TOKEN_ADDRESS } from "@/lib/contracts";
+import { CB_TOKEN_ADDRESS } from "@/lib/contracts";
 import Link from "next/link";
 
 export default function Dashboard() {
-  const { address, isConnected, chainId } = useAccount();
+  const { address, isConnected } = useAccount();
   const currentChainId = useChainId();
   const { data: ethBalance } = useBalance({ address, chainId: 11155111 });
   const { data: accountData, isLoading: accountLoading, refetch: refetchAccount } = useUserAccountData();
@@ -89,26 +89,6 @@ export default function Dashboard() {
       };
     })
     .filter(s => s.amount > 0);
-
-  // Borrows data (for future use)
-  const _borrows = TOKEN_LIST
-    .filter(t => !t.isAToken && t.symbol !== "CB")
-    .map((token, index) => {
-      const tokenIndex = TOKEN_LIST.findIndex(t => t.address === token.address);
-      const balance = tokenBalances[tokenIndex];
-      const aToken = TOKEN_LIST.find(t => t.symbol === "a" + token.symbol);
-      const aTokenIndex = TOKEN_LIST.findIndex(t => t.address === aToken?.address);
-      const aBalance = aTokenIndex >= 0 ? aTokenBalances[aTokenIndex] : undefined;
-      const price = prices[token.symbol]?.priceFormatted || "0";
-      const borrowBalance = aBalance?.balance ? parseTokenAmount(aBalance.balance.toString(), token.decimals) : 0n;
-      return {
-        ...token,
-        balance,
-        borrowBalance,
-        price: parseFloat(price),
-        usdValue: 0,
-      };
-    });
 
   return (
     <div className="pt-24 pb-12">
@@ -324,6 +304,6 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-    )
+    </div>
   );
 }

@@ -5,7 +5,6 @@ import { useAccount } from "wagmi";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useTokenBalance, TOKEN_LIST, formatTokenAmount } from "@/hooks/useTokenBalance";
 import { useAllTokenPrices } from "@/hooks/usePriceFeed";
-import { ToastProvider } from "@/components/Toast";
 
 const tokens = [
   { symbol: "WETH", name: "Wrapped Ether", icon: "🔷" },
@@ -15,7 +14,7 @@ const tokens = [
   { symbol: "WBTC", name: "Wrapped Bitcoin", icon: "₿" },
 ];
 
-function SwapContent() {
+export default function Swap() {
   const { address, isConnected } = useAccount();
   const [fromTokenSymbol, setFromTokenSymbol] = useState<"WETH" | "USDC" | "CB" | "LINK" | "WBTC">("WETH");
   const [toTokenSymbol, setToTokenSymbol] = useState<"WETH" | "USDC" | "CB" | "LINK" | "WBTC">("USDC");
@@ -209,13 +208,5 @@ function SwapContent() {
         </div>
       </div>
     </div>
-  );
-}
-
-export default function Swap() {
-  return (
-    <ToastProvider>
-      <SwapContent />
-    </ToastProvider>
   );
 }

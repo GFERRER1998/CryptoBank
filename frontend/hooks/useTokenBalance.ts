@@ -13,6 +13,7 @@ export interface TokenInfo {
   name: string;
   decimals: number;
   isAToken: boolean;
+  icon?: string;
 }
 
 export const TOKEN_LIST: TokenInfo[] = [

@@ -89,10 +89,10 @@ function LendingContent() {
   const tokenPrice = prices[selectedSymbol]?.priceFormatted || "0";
   const tokenPriceUsd = parseFloat(tokenPrice);
 
-  const canSupply = parseFloat(amount) > 0 && userTokenBalance && parseFloat(userTokenBalance) >= parseFloat(amount);
-  const canWithdraw = parseFloat(amount) > 0 && userATokenBalance && parseFloat(userATokenBalance) >= parseFloat(amount);
+  const canSupply = parseFloat(amount) > 0 && userTokenBalance && parseFloat(formatTokenAmount(userTokenBalance, decimals)) >= parseFloat(amount);
+  const canWithdraw = parseFloat(amount) > 0 && userATokenBalance && parseFloat(formatTokenAmount(userATokenBalance, decimals)) >= parseFloat(amount);
   const canBorrow = parseFloat(amount) > 0 && accountData && parseFloat(formatUnits(accountData.availableBorrowsBase, 18)) >= parseFloat(amount) * tokenPriceUsd;
-  const canRepay = parseFloat(amount) > 0 && userTokenBalance && parseFloat(userTokenBalance) >= parseFloat(amount);
+  const canRepay = parseFloat(amount) > 0 && userTokenBalance && parseFloat(formatTokenAmount(userTokenBalance, decimals)) >= parseFloat(amount);
 
   const needsApprove = allowance && parseUnits(amount, decimals) > allowance;
 
@@ -138,10 +138,10 @@ function LendingContent() {
     let maxAmount = "0";
     switch (activeTab) {
       case "supply":
-        maxAmount = userTokenBalance || "0";
+        maxAmount = userTokenBalance ? formatTokenAmount(userTokenBalance, decimals) : "0";
         break;
       case "withdraw":
-        maxAmount = userATokenBalance || "0";
+        maxAmount = userATokenBalance ? formatTokenAmount(userATokenBalance, decimals) : "0";
         break;
       case "borrow":
         if (accountData) {
@@ -150,7 +150,7 @@ function LendingContent() {
         }
         break;
       case "repay":
-        maxAmount = userTokenBalance || userBorrowBalance || "0";
+        maxAmount = userTokenBalance ? formatTokenAmount(userTokenBalance, decimals) : (userBorrowBalance || "0");
         break;
     }
     setAmount(maxAmount);
@@ -274,7 +274,7 @@ function LendingContent() {
                   </button>
                 </div>
                 <div className="flex justify-between text-xs text-gray-500 mt-1">
-                  <span>Balance: {userTokenBalance ? parseFloat(userTokenBalance).toFixed(4) : "0"} {selectedToken?.symbol}</span>
+                  <span>Balance: {userTokenBalance ? parseFloat(formatTokenAmount(userTokenBalance, decimals)).toFixed(4) : "0"} {selectedToken?.symbol}</span>
                   <span>aToken: {userSupplyBalance ? parseFloat(userSupplyBalance).toFixed(4) : "0"} a{selectedToken?.symbol}</span>
                 </div>
               </div>

@@ -86,6 +86,10 @@ export default function Dashboard() {
         amount,
         price: parseFloat(price),
         usdValue,
+        icon: token.icon,
+        name: token.name,
+        symbol: token.symbol,
+        decimals: token.decimals,
       };
     })
     .filter(s => s.amount > 0);

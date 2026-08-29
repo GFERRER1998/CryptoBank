@@ -190,7 +190,7 @@ export default function Dashboard() {
                 <Link href="/lending" className="text-sm text-yellow-400 hover:text-yellow-300">Manage →</Link>
               </div>
               <div className="bg-gray-700/50 rounded-lg p-4">
-                {accountData && accountData.totalDebtBase > 0n ? (
+                {accountData && accountData.totalDebtBase > 0 ? (
                   <div className="space-y-4">
                     <div className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
                       <div>
@@ -211,7 +211,7 @@ export default function Dashboard() {
                       <div className="text-center p-3 bg-gray-800/50 rounded-lg">
                         <p className="text-gray-400">LTV</p>
                         <p className="text-white font-bold">
-                          {accountData.totalCollateralBase > 0n 
+                          {accountData.totalCollateralBase > 0 
                             ? (Number(formatUnits(accountData.totalDebtBase, 18)) / Number(formatUnits(accountData.totalCollateralBase, 18)) * 100).toFixed(1) + "%"
                             : "0%"}
                         </p>

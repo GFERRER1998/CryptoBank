@@ -12,6 +12,8 @@ const nextConfig = {
       '@x402/core/client': false,
       '@x402/svm/exact/client': false,
       '@x402/evm': false,
+      '@react-native-async-storage/async-storage': false,
+      'pino-pretty': false,
     };
     return config;
   },

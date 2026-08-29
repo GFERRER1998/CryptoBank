@@ -155,3 +155,5 @@ export function getTokenDecimals(symbol: TokenSymbol): number {
   const token = TOKEN_LIST.find(t => t.symbol === symbol);
   return token?.decimals || 18;
 }
+
+export { CB_TOKEN_ADDRESS, SEPOLIA_TOKENS, ATOKEN_ADDRESSES } from "@/lib/contracts";

@@ -53,7 +53,7 @@ export default function Dashboard() {
       }
     });
 
-    if (accountData.totalDebtBase > 0n) {
+    if (accountData.totalDebtBase > 0) {
       totalBorrowedUsd = parseFloat(formatUnits(accountData.totalDebtBase, 18));
     }
   }

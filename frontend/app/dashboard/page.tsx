@@ -90,7 +90,8 @@ export default function Dashboard() {
     })
     .filter(s => s.amount > 0);
 
-  const borrows = TOKEN_LIST
+  // Borrows data (for future use)
+  const _borrows = TOKEN_LIST
     .filter(t => !t.isAToken && t.symbol !== "CB")
     .map((token, index) => {
       const tokenIndex = TOKEN_LIST.findIndex(t => t.address === token.address);

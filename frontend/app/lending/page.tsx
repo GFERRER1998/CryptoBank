@@ -60,9 +60,9 @@ function LendingContent() {
   const { healthFactor, formattedHealthFactor, isLoading: hfLoading } = useHealthFactor();
   const { prices, isLoading: pricesLoading } = useAllTokenPrices();
 
-  const { balance: userTokenBalance, refetch: refetchTokenBalance } = useTokenBalance(assetAddress, address);
-  const { balance: userATokenBalance, refetch: refetchATokenBalance } = useTokenBalance(aTokenAddress, address);
-  const { allowance, refetch: refetchAllowance } = useTokenAllowance(assetAddress, lendingPoolAddress, address);
+  const { balance: userTokenBalance, refetchBalance: refetchTokenBalance } = useTokenBalance(assetAddress, address);
+  const { balance: userATokenBalance, refetchBalance: refetchATokenBalance } = useTokenBalance(aTokenAddress, address);
+  const { allowance, refetchAllowance } = useTokenAllowance(assetAddress, lendingPoolAddress, address);
 
   const { supply, isPending: isSupplying, isSuccess: supplySuccess, error: supplyError, hash: supplyHash } = useSupply(assetAddress, parseTokenAmount(amount, decimals));
   const { withdraw, isPending: isWithdrawing, isSuccess: withdrawSuccess, error: withdrawError } = useWithdraw(assetAddress, parseTokenAmount(amount, decimals));
